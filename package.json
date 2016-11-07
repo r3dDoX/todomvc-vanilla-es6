@@ -9,7 +9,7 @@
     "watch": "watch \"npm run build\" src/"
   },
   "dependencies": {
-    "lodash": "4.16.6"
+    "t-shirt": "1.1.0"
   },
   "devDependencies": {
     "babel-preset-es2015-rollup": "1.2.0",

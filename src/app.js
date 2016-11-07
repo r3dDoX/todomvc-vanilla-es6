@@ -1,4 +1,5 @@
 import '../lib/todo-base.js';
+import 't-shirt';
 import Controller from './controller';
 import {$on} from './helpers';
 import Template from './template';
