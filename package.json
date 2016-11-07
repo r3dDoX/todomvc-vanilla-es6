@@ -1,9 +1,9 @@
 {
   "private": true,
   "scripts": {
-    "build:css": "lessc src/app.less dist/app.css --clean-css --no-ie-compat --source-map",
+    "build:css": "lessc src/app.less dist/app.css --clean-css --source-map",
     "bundle:js": "rollup -c",
-    "uglify:js": "uglifyjs dist/app.js -o dist/app.min.js --mangle --source-map=dist/app.min.js.map --in-source-map=dist/app.js.map -p relative",
+    "uglify:js": "uglifyjs dist/app.js -o dist/app.min.js -c -m --source-map=dist/app.min.js.map --in-source-map=dist/app.js.map -p relative",
     "build:js": "npm run bundle:js && npm run uglify:js",
     "build": "npm run build:css & npm run build:js",
     "watch": "watch \"npm run build\" src/"
