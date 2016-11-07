@@ -3,8 +3,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: {
-        app: './src/app.js',
-        vendor: 't-shirt'
+        app: './src/app.js'
     },
 
     devtool: 'source-map',
@@ -15,7 +14,7 @@ module.exports = {
     },
 
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.js$/,
                 loader: 'babel-loader',
@@ -38,10 +37,7 @@ module.exports = {
             sourceMap: true
         }),
         new HtmlWebpackPlugin({
-            template: 'index.html',
-        }),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendor'
+            template: 'index.html'
         })
     ],
 };
