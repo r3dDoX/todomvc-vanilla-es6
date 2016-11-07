@@ -1,9 +1,8 @@
 {
   "private": true,
   "scripts": {},
-  "dependencies": {
-    "lodash": "4.16.6"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "t-shirt": "1.1.0"
   }
 }
