@@ -1,3 +1,4 @@
+import 't-shirt';
 import '../../lib/todo-base';
 import Controller from './controller';
 import {$on} from './helpers';
