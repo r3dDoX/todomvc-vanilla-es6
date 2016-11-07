@@ -3,7 +3,7 @@
   "scripts": {
     "build:css": "lessc src/app.less dist/app.css --clean-css --no-ie-compat --source-map",
     "bundle:js": "rollup src/app.js -o dist/app.bundle --sourcemap=inline",
-    "transpile:js": "babel dist/app.bundle --out-file dist/app.es5 --source-maps=inline",
+    "transpile:js": "babel dist/app.bundle --out-file dist/app.es5 --source-maps=inline --presets=es2015",
     "uglify:js": "uglifyjs dist/app.es5 -o dist/app.js --mangle --screw-ie8 --source-map-inline --source-map-root=../",
     "build:js": "npm run bundle:js && npm run transpile:js && npm run uglify:js",
     "build": "npm run build:css & npm run build:js",
