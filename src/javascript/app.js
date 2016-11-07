@@ -1,5 +1,4 @@
-//import 't-shirt';
-import '../../build/node_modules/t-shirt/index';
+import 't-shirt/index';
 import '../../lib/todo-base';
 import Controller from './controller';
 import {$on} from './helpers';

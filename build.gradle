@@ -27,6 +27,7 @@ minifyJs {
         compilerOptions.languageIn="ECMASCRIPT6"
         compilerOptions.languageOut="ECMASCRIPT5"
         compilerOptions.processCommonJSModules = true
+        compilerOptions.moduleRoots = [clientDependencies.installDir.toString()]
         compilationLevel = "ADVANCED_OPTIMIZATIONS"
     }
 }
