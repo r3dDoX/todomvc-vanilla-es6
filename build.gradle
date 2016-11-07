@@ -1,7 +1,66 @@
 plugins {
     id "com.eriwen.gradle.js" version "2.14.1"
     id "com.eriwen.gradle.css" version "2.14.0"
+    id "com.moowork.node" version "0.13"
 }
+
+node {
+    // Version of node to use.
+    version = '0.11.10'
+
+    // Version of npm to use.
+    npmVersion = '2.1.5'
+
+    // Base URL for fetching node distributions (change if you have a mirror).
+    distBaseUrl = 'https://nodejs.org/dist'
+
+    // If true, it will download node using above parameters.
+    // If false, it will try to use globally installed node.
+    download = true
+
+    // Set the work directory for unpacking node
+    workDir = file("${project.buildDir}/nodejs")
+
+    // Set the work directory where node_modules should be located
+    nodeModulesDir = file("${project.projectDir}")
+}
+
+minifyJs {
+    source = ["${projectDir}/src/javascript"]
+    dest = file("${buildDir}/app.js")
+    sourceMap = file("${buildDir}/app.sourcemap.json")
+    closure {
+        warningLevel = 'QUIET'
+        compilerOptions.languageIn="ECMASCRIPT6"
+        compilerOptions.languageOut="ECMASCRIPT5"
+        compilationLevel = "ADVANCED_OPTIMIZATIONS"
+    }
+}
+minifyJs.dependsOn npmInstall
+
+lesscss {
+    source = "${projectDir}/src/less"
+    dest = "${buildDir}/css"
+}
+
+combineCss {
+    source = lesscss.dest
+    dest = file("${buildDir}/app-combined.css")
+}
+combineCss.dependsOn lesscss
+
+minifyCss {
+    source = combineCss.dest
+    dest = file("${buildDir}/app.css")
+}
+minifyCss.dependsOn combineCss
+
+task(together) << {
+    println "Ready to go :)"
+}
+together.dependsOn minifyJs
+together.dependsOn minifyCss
+
 
 /*
 combineJs {
@@ -12,19 +71,6 @@ combineJs {
 }
 */
 
-minifyJs {
-    source = ["${projectDir}/src/javascript"]
-    dest = file("${buildDir}/app.js")
-    sourceMap = file("${buildDir}/app.sourcemap.json")
-    closure {
-        warningLevel = 'QUIET'
-//        compilerOptions.defineReplacements = ['MY_DBUG_FLAG':false]
-        compilerOptions.languageIn="ECMASCRIPT6"
-        compilerOptions.languageOut="ECMASCRIPT5"
-        compilationLevel = "ADVANCED_OPTIMIZATIONS"
-    }
-}
-
 /*
 gzipJs {
     source = minifyJs.dest
@@ -33,21 +79,3 @@ gzipJs {
 gzipJs.dependsOn minifyJs
 */
 
-lesscss {
-    source = "${projectDir}/src/less"
-    dest = "${buildDir}/css"
-}
-
-combineCss {
-    source = lesscss.dest
-    // show the resolved files when gradle is run with -d
-    source.each{ logger.debug ("$it") }
-    dest = file("${buildDir}/app-combined.css")
-}
-combineCss.dependsOn lesscss
-
-minifyCss {
-    source = combineCss.dest
-    dest = file("${buildDir}/app.css")
-}
-minifyCss.dependsOn combineCss
