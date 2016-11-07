@@ -1,0 +1,53 @@
+plugins {
+    id "com.eriwen.gradle.js" version "2.14.1"
+    id "com.eriwen.gradle.css" version "2.14.0"
+}
+
+/*
+combineJs {
+    source = ["${projectDir}/src/javascript"]
+    // show the resolved files when gradle is run with -d
+    source.each{ logger.debug ("$it") }
+    dest = file("${buildDir}/all.js")
+}
+*/
+
+minifyJs {
+    source = ["${projectDir}/src/javascript"]
+    dest = file("${buildDir}/app.js")
+    sourceMap = file("${buildDir}/app.sourcemap.json")
+    closure {
+        warningLevel = 'QUIET'
+//        compilerOptions.defineReplacements = ['MY_DBUG_FLAG':false]
+        compilerOptions.languageIn="ECMASCRIPT6"
+        compilerOptions.languageOut="ECMASCRIPT5"
+        compilationLevel = "ADVANCED_OPTIMIZATIONS"
+    }
+}
+
+/*
+gzipJs {
+    source = minifyJs.dest
+    dest = file("${buildDir}/app.min.js.gz")
+}
+gzipJs.dependsOn minifyJs
+*/
+
+lesscss {
+    source = "${projectDir}/src/less"
+    dest = "${buildDir}/css"
+}
+
+combineCss {
+    source = lesscss.dest
+    // show the resolved files when gradle is run with -d
+    source.each{ logger.debug ("$it") }
+    dest = file("${buildDir}/app-combined.css")
+}
+combineCss.dependsOn lesscss
+
+minifyCss {
+    source = combineCss.dest
+    dest = file("${buildDir}/app.css")
+}
+minifyCss.dependsOn combineCss
