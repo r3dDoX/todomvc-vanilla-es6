@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import {Item, ItemList, ItemQuery, ItemUpdate, emptyItemQuery} from './item';
 
 export default class Store {
@@ -54,7 +55,7 @@ export default class Store {
 		const todos = this.getLocalStorage();
 		let k;
 
-		callback(todos.filter(todo => {
+		callback(_.filter(todos, todo => {
 			for (k in query) {
 				if (query[k] !== todo[k]) {
 					return false;
