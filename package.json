@@ -5,7 +5,8 @@
     "bundle:js": "rollup -c",
     "uglify:js": "uglifyjs dist/app.js -o dist/app.min.js -c -m --source-map=dist/app.min.js.map --in-source-map=dist/app.js.map -p relative",
     "build:js": "npm run bundle:js && npm run uglify:js",
-    "build": "npm run build:css && npm run build:js"
+    "build": "npm run build:css && npm run build:js",
+    "watch": "watch \"npm run build\" src/"
   },
   "dependencies": {
     "t-shirt": "1.1.0"
@@ -18,6 +19,7 @@
     "rollup-plugin-babel": "2.6.1",
     "rollup-plugin-commonjs": "5.0.5",
     "rollup-plugin-node-resolve": "2.0.0",
-    "uglifyjs": "2.4.10"
+    "uglifyjs": "2.4.10",
+    "watch": "1.0.1"
   }
 }
