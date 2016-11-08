@@ -9,17 +9,14 @@ export default {
   format: 'iife',
   sourceMap: true,
   plugins: [
-
     resolve({
       jsnext: true,
       main: true,
       browser: true,
     }),
-
     commonjs({
       include: 'node_modules/**'
     }),
-
     babel({
       exclude: 'node_modules/**'
     })

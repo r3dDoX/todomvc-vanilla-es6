@@ -2,19 +2,25 @@
   "private": true,
   "scripts": {
     "build:css": "lessc src/app.less dist/app.css --clean-css --source-map",
-    "build:js": "rollup -c",
-    "build": "npm run build:css && npm run build:js"
+    "bundle:js": "rollup -c",
+    "uglify:js": "uglifyjs dist/app.js -o dist/app.min.js -c -m --source-map=dist/app.min.js.map --in-source-map=dist/app.js.map -p relative",
+    "build:js": "npm run bundle:js && npm run uglify:js",
+    "build": "npm run build:css && npm run build:js",
+    "dev": "npm run watch & browser-sync start --server --files 'dist/*, index.html'"
   },
   "dependencies": {
     "t-shirt": "1.1.0"
   },
   "devDependencies": {
     "babel-preset-es2015-rollup": "1.2.0",
+    "browser-sync": "2.17.5",
     "less": "2.7.1",
     "less-plugin-clean-css": "1.5.1",
     "rollup": "0.36.3",
     "rollup-plugin-babel": "2.6.1",
     "rollup-plugin-commonjs": "5.0.5",
-    "rollup-plugin-node-resolve": "2.0.0"
+    "rollup-plugin-node-resolve": "2.0.0",
+    "uglifyjs": "2.4.10",
+    "watch": "1.0.1"
   }
 }

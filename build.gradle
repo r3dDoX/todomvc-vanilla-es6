@@ -1,11 +1,12 @@
 plugins {
-  id "com.moowork.node" version "0.13"  // the node plugin
+  id "com.moowork.node" version "0.13"  // importing gradle-node-plugin
 }
 
+// configuration of gradle-node-plugin
 node {
   // Version of node to use.  
   // Advantage: define which node-version to use, project-wide, 
-  // Advantage: loads node like a dependency, solves distribution to devs
+  // Advantage: loads node like a dependency, solves distribution to developers
   version = '7.0.0'
 
   // Version of npm to use.
@@ -16,10 +17,13 @@ node {
   download = true
 }
 
-def nodeModulesBinDirectory = "./node_modules/.bin/";
+defaultTasks 'build'
+
+// building css -----------------
 
 // Alternative 1: execute npm run script as NpmTask
-// Advantages: NPM 
+// Advantages: NPM can be used as well, Gradle is used for watch, incremental, parallel)
+// Disadvatage: build code heavyly distributed
 task buildCss(type: NpmTask) {
   inputs.files fileTree(dir: 'src', include: '**/*.less')
   outputs.files files(['dist/app.css', 'dist/app.css.map'])
@@ -27,25 +31,48 @@ task buildCss(type: NpmTask) {
 }
 buildCss.dependsOn npmInstall
 
-// Alternative 2: implement the same in Gradle 
-// Advantages: no NPM scripts, use Gradle only (incremental, watch, parallel)
-// Disadvatage: duplicate
+// Alternative 2: implement the same in Gradle as in the NPM script
+// Advantages: empty script section in package.json, use Gradle only (incremental, watch, parallel)
 task buildCssWithoutNpmScript(type:Exec) {
+  def nodeModulesBinDirectory = "./node_modules/.bin/";
   inputs.files fileTree(dir: 'src', include: '**/*.less')
   outputs.files files(['dist/app.css', 'dist/app.css.map'])
   commandLine nodeModulesBinDirectory+'lessc.cmd', 'src/app.less', 'dist/app.css', '--clean-css', '--no-ie-compat', '--source-map'
 }
 buildCssWithoutNpmScript.dependsOn npmInstall
 
-task buildJs(type:NpmTask) {
-  inputs.files fileTree(dir: 'src', include: '**/*.js')
-  inputs.files file("rollup.config.js")
-  outputs.files files(['dist/app.js', 'dist/app.js.map'])
-  args = ['run', 'build:js']
-}
-buildJs.dependsOn npmInstall
 
-// run "gradle nodeVersion" to get the 
+// building js -----------------
+task bundleJs(type: NpmTask) {
+  inputs.files fileTree(dir: 'src', include: '**/*.js')
+  outputs.files files(['dist/app.js', 'dist/app.js.map'])
+  args = ['run', 'bundle:js']
+}
+bundleJs.dependsOn npmInstall
+
+task uglifyJs(type: NpmTask) {
+  inputs.files bundleJs.outputs
+  outputs.files files(['dist/app.min.js', 'dist/app.min.js.map'])
+  args = ['run', 'uglify:js']
+}
+uglifyJs.dependsOn bundleJs
+
+
+
+// task dependencies ------------
+task buildJs << { }
+buildJs.dependsOn uglifyJs
+
+task build << { }
+build.dependsOn buildJs
+build.dependsOn buildCss
+
+
+// helper task -----------------
+task clean(type: Delete) {
+  delete 'dist'
+}
+
 task nodeVersion(type: NodeTask) {
   script = file("version.js")
   args = ['--version'] 
