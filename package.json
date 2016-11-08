@@ -1,9 +1,0 @@
-{
-  "private": true,
-  "scripts": {},
-  "dependencies": {
-    "t-shirt": "1.1.0"
-  },
-  "devDependencies": {
-  }
-}
