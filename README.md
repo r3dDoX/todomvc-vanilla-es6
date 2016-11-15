@@ -1,4 +1,4 @@
-# Vanilla ES6 (ES2015) • [TodoMVC](http://todomvc.com)
+# NPM Scripts build for Vanilla ES6 (ES2015) • [TodoMVC](http://todomvc.com)
 
 A plain [Vanilla JS](http://todomvc.com/examples/vanillajs/) implementation of a Todo-App.
 
@@ -18,3 +18,6 @@ This example application is used to compare various different build tools, here 
 
 ## Usage example
 Run `npm run build`
+
+## See also
+[Jass challenge](https://github.com/webplatformz/challenge) for a more complex example
