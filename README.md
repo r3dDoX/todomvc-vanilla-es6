@@ -2,10 +2,17 @@
 
 A plain [Vanilla JS](http://todomvc.com/examples/vanillajs/) implementation of a Todo-App.
 
-This example application is used to compare various different build tools. This branch is built with NPM scripts.
+This example application is used to compare various different build tools, here it is built with **NPM scripts**.
 
 ## Build Tool
-* NPM scritps
+* NPM scripts
+
+## Prerequisites
+* Node (including NPM)
 
 ## Relevant files
-* package.json -> scripts section
+* package.json (scripts defined in the scripts section)
+* rollup.config.js (configuration for rollup which is called from the bundle:js task)
+
+## Usage example
+Run `npm run build`
