@@ -13,6 +13,13 @@ Shows how Gradle can be used as a Wrapper around NPM scripts.
 ## Prerequisites:
 * Java Runtime Environment
 
+## Relevant files
+* build.gradle (the build script)
+* rollup.config (configuration for rollup used in bundleJs task)
+* .babelrc (configuration for babel used from rollup in bundleJs task)
+* gradle (gradle wrapper to be able to start Gradle without installation)
+* gradle.bat (gradle wrapper)
+
 ## Usage examples
 
 Run: `gradlew`
