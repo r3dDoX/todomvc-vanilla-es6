@@ -1,6 +1,13 @@
 # Gradle build for Vanilla ES6 (ES2015) • [TodoMVC](http://todomvc.com)
 
-A port of the [Vanilla JS Example](http://todomvc.com/examples/vanillajs/).
+A plain [Vanilla JS](http://todomvc.com/examples/vanillajs/) implementation of a Todo-App.
+
+This example application is used to compare various different build tools, here it is built with **Gradle**.
+
+## Tools
+Gradle
+
+## Approach
 Shows how Gradle can be used as a Wrapper around NPM scripts.
 
 ## Prerequisites:
