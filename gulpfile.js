@@ -8,14 +8,14 @@ var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var livereload = require('gulp-server-livereload');
 
-gulp.task('build',['js', 'less']);
+gulp.task('build', ['js', 'less']);
 
 gulp.task('js', () => {
     return browserify({
-        entries: ["src/app.js"],
+        entries: ['src/app.js'],
         debug: true
     })
-        .transform("babelify", {presets: ["es2015"]})
+        .transform('babelify', {presets: ['es2015']})
         .bundle()
         .pipe(source('app.js'))
         .pipe(buffer())
@@ -33,13 +33,12 @@ gulp.task('less', () => {
         .pipe(gulp.dest('./dist'));
 });
 
-gulp.task('watch', function() {
+gulp.task('watch', () => {
     gulp.src('./')
         .pipe(livereload({
             livereload: true,
-            directoryListing: true,
             open: true,
-            defaultFile: 'index.html'
+            defaultFile: './index.html'
         }));
     gulp.watch('src/*.less', ['less']);
     gulp.watch('src/*.js', ['js']);

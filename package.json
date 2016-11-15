@@ -2,6 +2,8 @@
   "private": true,
   "scripts": {
     "gulp": "gulp",
+    "js": "gulp js",
+    "less": "gulp less",
     "build": "gulp build",
     "watch": "gulp watch"
   },
