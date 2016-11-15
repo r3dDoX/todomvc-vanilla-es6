@@ -12,6 +12,8 @@ This example application is used to compare various different build tools, here 
 
 ## Relevant files
 * package.json (scripts defined in the scripts section)
+* rollup.config (configuration for rollup used in bundle:js task)
+* .babelrc (configuration for babel used from rollup in bundle:js task)
 * rollup.config.js (configuration for rollup which is called from the bundle:js task)
 
 ## Usage example
