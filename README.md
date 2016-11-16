@@ -17,7 +17,7 @@ Shows how Cake can be used as a Wrapper around NPM scripts.
 
 ## Relevant files
 * build.ps1/build.sh (cake boostrapping scripts for win, linux, osx)
-* build.cake (the build file)
+* build.cake (the actual build file, called from the build.ps1/build.sh script)
 
 ## Usage examples
 
@@ -51,6 +51,7 @@ Total:                        00:00:01.2968708
 
 ## The Linux experience
 Try this at home:
+
 1. Setup a fresh Ubuntu VM in your favourite cloud provider
 1. Install .NET core as [described](https://www.microsoft.com/net/core#linuxubuntu)
 1. Install .NET core `sudo apt-get install dotnet-dev-1.0.0-preview2.1-003177`
@@ -60,8 +61,8 @@ Try this at home:
 6. Run build script `./build.sh` --> oops, `mono` seems to be required (and I thought .NET Core is sufficient)
 7. Install mono as [described](http://www.mono-project.com/docs/getting-started/install/linux/)
 11. Install mono `sudo apt-get install mono-complete` 
-12. Try again `./build.sh` --> oops, `npm` is not installed and
+12. Try again `./build.sh` --> oops, `npm` is not installed
 15. Install node `sudo apt install npm`
-14. Try again `./build.sh` --> oops, `npm` is not installed
+14. Try again `./build.sh` --> oops, `node` is not installed
 13. Install node `sudo apt install nodejs-legacy`
 16. Try again `./build.sh` --> hooray!
