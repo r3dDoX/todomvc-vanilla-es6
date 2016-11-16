@@ -12,6 +12,7 @@ Shows how Gradle can be used as a Wrapper around NPM scripts.
 
 ## Prerequisites:
 * Java Runtime Environment
+* ~~Node~~ (not required, Gradle loads and uses the node runtime in the correct version as a development dependency)
 
 ## Relevant files
 * build.gradle (the build script)
