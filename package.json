@@ -7,7 +7,7 @@
     "build:js": "npm run bundle:js && npm run uglify:js",
     "build": "npm run build:css && npm run build:js",
     "watch": "watch \"npm run build\" src/",
-    "dev": "npm run watch & browser-sync start --server --files 'dist/*, index.html'"
+    "dev": "npm run watch & browser-sync start --server --files \"dist/*, index.html\""
   },
   "dependencies": {
     "t-shirt": "1.1.0"
